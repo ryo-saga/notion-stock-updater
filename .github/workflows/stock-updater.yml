@@ -27,12 +27,12 @@ jobs:
         pip install -r requirements.txt
     
     - name: Run stock updater
-    env:
-    ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
-    NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-    PAGE_ID: ${{ secrets.PAGE_ID }}
-    run: |
-    python notion_page_updater.py
+      env:
+        ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+        NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        PAGE_ID: ${{ secrets.PAGE_ID }}
+      run: |
+        python notion_page_updater.py
     
     - name: Display completion status
       run: |
