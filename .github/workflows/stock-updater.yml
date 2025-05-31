@@ -1,0 +1,40 @@
+name: Stock Price Updater
+
+on:
+  # Run Monday to Friday at 4:30 PM EST (21:30 UTC)
+  schedule:
+    - cron: '30 21 * * 1-5'
+  
+  # Allow manual triggering for testing
+  workflow_dispatch:
+
+jobs:
+  update-stocks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run stock updater
+      env:
+        ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+        NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        DATABASE_ID: ${{ secrets.DATABASE_ID }}
+      run: |
+        python github_stock_updater.py
+    
+    - name: Display completion status
+      run: |
+        echo "✅ Stock update completed successfully!"
+        echo "📅 Timestamp: $(date)"
