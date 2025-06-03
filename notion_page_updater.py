@@ -268,6 +268,9 @@ def main():
         "MSFT",    # Microsoft
         "TSLA",    # Tesla
         "AMZN",    # Amazon
+        "PFE",     #Pfizer
+        "ENB",     #Enbrige
+        "OXY",     #Occidental Petroleum
     ]
     
     print("🤖 GitHub Actions Page Stock Updater")
